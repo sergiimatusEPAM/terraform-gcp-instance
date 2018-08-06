@@ -33,3 +33,17 @@ variable "ssh_user" {}
 
 # SSH Public Key
 variable "public_ssh_key" {}
+
+# Add special tags to the resources created by this module
+variable "tags" {
+  type        = "list"
+  default     = []
+}
+
+# Format the hostname inputs are index+1, region, cluster_name
+variable "hostname_format" {
+  default     = "%[3]s-instance%[1]d-%[2]s"
+}
+
+# Specify the cluster name all resources get named and tagged with
+variable "cluster_name" {}

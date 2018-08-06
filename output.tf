@@ -2,6 +2,7 @@
 output "num_instances" {
   value = "${var.num_instances}"
 }
+
 # Cluster Name
 output "cluster_name" {
   value = "${var.cluster_name}"
