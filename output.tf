@@ -24,8 +24,8 @@ output "zone_list" {
 }
 
 # Source image to boot from
-output "customer_image" {
-  value = "${var.customer_image}"
+output "image" {
+  value = "${var.image}"
 }
 
 # Disk Type to Leverage
@@ -59,11 +59,11 @@ output "public_ssh_key" {
 }
 
 # Private IP Addresses
-output "instance_private_ip_addresses" {
+output "private_ips" {
   value = ["${google_compute_instance.instances.*.network_interface.0.address}"]
 }
 
 # Public IP Addresses
-output "instance_public_ip_addresses" {
+output "public_ips" {
   value = ["${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"]
 }
