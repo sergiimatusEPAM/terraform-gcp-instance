@@ -1,3 +1,5 @@
+provider "google" {}
+
 resource "google_compute_instance" "instances" {
   count          = "${var.num_instances}"
   name           = "${var.cluster_name}-instance"
@@ -7,7 +9,7 @@ resource "google_compute_instance" "instances" {
   zone           = "${element(var.zone_list, count.index)}"
 
   disk {
-    source_image = "${var.customer_image}"
+    source_image = "${var.image}"
     auto_delete  = true
     disk_type    = "${var.disk_type}"
     disk_size_gb = "${var.disk_size}"
@@ -24,7 +26,7 @@ resource "google_compute_instance" "instances" {
   tags = ["${var.tags}", "${format(var.hostname_format, (count.index + 1), var.region, var.cluster_name)}"]
 
   metadata = {
-    user-data = "${var.customer_userdata_rendered}"
+    user-data = "${var.gcp_user_data}"
     sshKeys   = "${var.ssh_user}:${file(var.public_ssh_key)}"
   }
 }
