@@ -6,22 +6,26 @@ Creates generic instances for DC/OS nodes
 
 ```hcl
 module "masters" {
-  source = "../terraform-gcp-instances"
+  source  = "dcos-terraform/instance/gcp"
+  version = "~> 0.0"
 
-  # version = "0.0.0"
+  providers = {
+    google = "google"
+  }
 
-  num_instance                   = "${var.instances_count}"
-  disk_size                      = "${var.gcp_instances_disk_size}"
-  disk_type                      = "${var.gcp_instances_disktype}"
-  region                         = "${var.gcp_region}"
-  machine_type                   = "${var.gcp_instances_gce_type}"
-  cluster_name                   = "${var.cluster_name}"
-  public_ssh_key                 = "${var.gcp_ssh_key}"
-  instances_subnetwork_name      = "${module.network.instances_subnetwork_name}"
-  instances_targetpool_self_link = "${module.network.instances_targetpool_self_link}"
-  customer_image                 = "${var.image}"
-  region                         = "${var.gcp_region}"
-  zone_list                      = "${data.google_compute_zones.available.names}"
+  cluster_name             = "${var.cluster_name}"
+  hostname_format          = "${var.hostname_format}"
+  num                      = "${var.num_masters}"
+  image                    = "${coalesce(var.image, module.dcos-tested-oses.gcp_image_name)}"
+  user_data                = "${var.image == "" ? module.dcos-tested-oses.os-setup : var.gcp_user_data}"
+  machine_type             = "${var.machine_type}"
+  instance_subnetwork_name = ["${var.master_subnetwork_name}"]
+  ssh_user                 = "${var.ssh_user}"
+  public_ssh_key           = "${var.public_ssh_key}"
+  zone_list                = "${var.zone_list}"
+  disk_type                = "${var.disk_type}"
+  disk_size                = "${var.disk_size}"
+  tags                     = "${var.tags}"
 }
 ```
 
