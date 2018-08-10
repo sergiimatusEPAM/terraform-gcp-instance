@@ -26,7 +26,7 @@ variable "disk_size" {}
 variable "instance_subnetwork_name" {}
 
 # Customer Provided Userdata
-variable "gcp_user_data" {}
+variable "user_data" {}
 
 # SSH User
 variable "ssh_user" {}

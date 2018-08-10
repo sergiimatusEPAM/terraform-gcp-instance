@@ -26,7 +26,7 @@ resource "google_compute_instance" "instances" {
   tags = ["${var.tags}", "${format(var.hostname_format, (count.index + 1), var.region, var.cluster_name)}"]
 
   metadata = {
-    user-data = "${var.gcp_user_data}"
+    user-data = "${var.user_data}"
     sshKeys   = "${var.ssh_user}:${file(var.public_ssh_key)}"
   }
 }
