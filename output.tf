@@ -44,8 +44,8 @@ output "instance_subnetwork_name" {
 }
 
 # Customer Provided Userdata
-output "userdata" {
-  value = "${var.userdata}"
+output "user_data" {
+  value = "${var.user_data}"
 }
 
 # SSH User
