@@ -8,11 +8,6 @@ output "cluster_name" {
   value = "${var.cluster_name}"
 }
 
-# Region
-output "region" {
-  value = "${var.region}"
-}
-
 # Instance Type
 output "machine_type" {
   value = "${var.machine_type}"
