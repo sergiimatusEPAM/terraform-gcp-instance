@@ -4,9 +4,6 @@ variable "num_instances" {}
 # Cluster Name
 variable "cluster_name" {}
 
-# Region
-variable "region" {}
-
 # Instance Type
 variable "machine_type" {}
 

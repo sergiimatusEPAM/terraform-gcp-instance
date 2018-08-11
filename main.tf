@@ -3,7 +3,6 @@ provider "google" {}
 resource "google_compute_instance" "instances" {
   count          = "${var.num_instances}"
   name           = "${var.cluster_name}-instance"
-  region         = "${var.region}"
   machine_type   = "${var.machine_type}"
   can_ip_forward = false
   zone           = "${element(var.zone_list, count.index)}"
