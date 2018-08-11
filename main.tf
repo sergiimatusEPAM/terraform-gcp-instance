@@ -25,7 +25,7 @@ resource "google_compute_instance" "instances" {
     }
   }
 
-  tags = ["${var.tags}", "${format(var.hostname_format, (count.index + 1), var.region, var.cluster_name)}"]
+  tags = ["${var.tags}", "${format(var.hostname_format, (count.index + 1), var.cluster_name)}"]
 
   metadata = {
     user-data = "${var.user_data}"
