@@ -16,7 +16,7 @@ variable "zone_list" {}
 # Source image to boot from
 variable "image" {}
 
-# Disk Type to Leverage
+# Disk Type to Leverage. The GCE disk type. Can be either "pd-ssd", "local-ssd", or "pd-standard". (optional)
 variable "disk_type" {}
 
 # Disk Size in GB

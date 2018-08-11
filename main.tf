@@ -8,11 +8,14 @@ resource "google_compute_instance" "instances" {
   can_ip_forward = false
   zone           = "${element(var.zone_list, count.index)}"
 
-  disk {
-    source_image = "${var.image}"
-    auto_delete  = true
-    disk_type    = "${var.disk_type}"
-    disk_size_gb = "${var.disk_size}"
+  boot_disk {
+    initialize_params {
+      image = "${var.image}"
+      size  = "${var.disk_size}"
+      type  = "${var.disk_type}"
+    }
+
+    auto_delete = true
   }
 
   network_interface {
