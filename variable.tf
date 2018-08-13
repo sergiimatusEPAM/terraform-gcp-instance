@@ -9,7 +9,7 @@ variable "machine_type" {}
 
 # Element by zone list
 variable "zone_list" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
