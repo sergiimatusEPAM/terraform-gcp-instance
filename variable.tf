@@ -8,7 +8,10 @@ variable "cluster_name" {}
 variable "machine_type" {}
 
 # Element by zone list
-variable "zone_list" {}
+variable "zone_list" {
+  type = "list"
+  default = []
+}
 
 # Source image to boot from
 variable "image" {}
