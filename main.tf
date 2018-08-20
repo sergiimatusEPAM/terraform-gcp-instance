@@ -1,5 +1,18 @@
 provider "google" {
   project = "${var.project_id}"
+  region      = "${var.region}"
+}
+
+resource "google_compute_target_pool" "instances" {
+  name           = "${format(var.hostname_format, 0, var.name_prefix)}"
+  description = "DC/OS Instance Group"
+
+  instances = [
+    "${google_compute_instance.instances.*.self_link}"
+  ]
+
+#  region = "${var.region}"
+
 }
 
 resource "google_compute_instance" "instances" {

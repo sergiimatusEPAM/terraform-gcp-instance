@@ -1,6 +1,9 @@
 # project id
 variable "project_id" {}
 
+# region
+variable "region" {}
+
 # Number of Instance
 variable "num_instances" {}
 
