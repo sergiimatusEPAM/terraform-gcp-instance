@@ -1,16 +1,18 @@
+# project id
+variable "project_id" {}
+
 # Number of Instance
 variable "num_instances" {}
 
 # Cluster Name
-variable "cluster_name" {}
+variable "name_prefix" {}
 
 # Instance Type
 variable "machine_type" {}
 
 # Element by zone list
 variable "zone_list" {
-  type    = "list"
-  default = []
+  type = "list"
 }
 
 # Source image to boot from
@@ -40,7 +42,7 @@ variable "tags" {
   default = []
 }
 
-# Format the hostname inputs are index+1, region, cluster_name
+# Format the hostname inputs are index+1, region, name_prefix
 variable "hostname_format" {
-  default = "%[3]s-instance%[1]d-%[2]s"
+  default = "instance-%[1]d-%[2]s"
 }

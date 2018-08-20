@@ -4,8 +4,8 @@ output "num_instances" {
 }
 
 # Cluster Name
-output "cluster_name" {
-  value = "${var.cluster_name}"
+output "name_prefix" {
+  value = "${var.name_prefix}"
 }
 
 # Instance Type

@@ -1,8 +1,10 @@
-provider "google" {}
+provider "google" {
+  project = "${var.project_id}"
+}
 
 resource "google_compute_instance" "instances" {
   count          = "${var.num_instances}"
-  name           = "${var.cluster_name}-instance"
+  name           = "${format(var.hostname_format, (count.index + 1), var.name_prefix)}"
   machine_type   = "${var.machine_type}"
   can_ip_forward = false
   zone           = "${element(var.zone_list, count.index)}"
@@ -25,7 +27,7 @@ resource "google_compute_instance" "instances" {
     }
   }
 
-  tags = ["${var.tags}", "${format(var.hostname_format, (count.index + 1), var.cluster_name)}"]
+  tags = ["${var.tags}", "${format(var.hostname_format, (count.index + 1), var.name_prefix)}"]
 
   metadata = {
     user-data = "${var.user_data}"
