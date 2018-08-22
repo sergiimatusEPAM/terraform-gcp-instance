@@ -13,6 +13,16 @@ output "machine_type" {
   value = "${var.machine_type}"
 }
 
+# DCOS Version for prereq install
+output "dcos_version" {
+  value = "${var.dcos_version}"
+}
+
+# Tested OSes to install with prereq
+output "dcos_instance_os" {
+  value = "${var.dcos_instance_os}"
+}
+
 # Element by zone list
 output "zone_list" {
   value = "${var.zone_list}"

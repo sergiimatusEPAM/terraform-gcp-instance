@@ -7,6 +7,15 @@ variable "name_prefix" {}
 # Instance Type
 variable "machine_type" {}
 
+# DCOS Version for prereq install
+variable "dcos_version" {}
+
+# Tested OSes to install with prereq
+variable "dcos_instance_os" {}
+
+# Private SSH Key Filename Optional
+variable "ssh_private_key_filename" { default = "/dev/null" }
+
 # Element by zone list
 variable "zone_list" {
   type = "list"
