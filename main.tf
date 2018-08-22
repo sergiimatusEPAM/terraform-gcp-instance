@@ -1,18 +1,12 @@
-provider "google" {
-  project = "${var.project_id}"
-  region      = "${var.region}"
-}
+provider "google" {}
 
 resource "google_compute_target_pool" "instances" {
-  name           = "${format(var.hostname_format, 0, var.name_prefix)}"
+  name        = "${format(var.hostname_format, 0, var.name_prefix)}"
   description = "DC/OS Instance Group"
 
   instances = [
-    "${google_compute_instance.instances.*.self_link}"
+    "${google_compute_instance.instances.*.self_link}",
   ]
-
-#  region = "${var.region}"
-
 }
 
 resource "google_compute_instance" "instances" {
@@ -46,4 +40,34 @@ resource "google_compute_instance" "instances" {
     user-data = "${var.user_data}"
     sshKeys   = "${var.ssh_user}:${file(var.public_ssh_key)}"
   }
+
+  #############################
+  #
+  #  # OS init script
+  #  provisioner "file" {
+  #   content = "${module.dcos-tested-gcp-oses.os-setup}"
+  #   destination = "/tmp/os-setup.sh"
+  #   }
+  #
+  # # We run a remote provisioner on the instance after creating it.
+  #  # In this case, we just install nginx and start it. By default,
+  #  # this should be on port 80
+  #    provisioner "remote-exec" {
+  #    inline = [
+  #      "sudo chmod +x /tmp/os-setup.sh",
+  #      "sudo bash /tmp/os-setup.sh",
+  #    ]
+  #  }
+  #
+  #  lifecycle {
+  #    ignore_changes = ["labels.Name", "labels.cluster"]
+  #  }
+  #
+  #
+  ############################
+
+    scheduling {
+      preemptible = "${var.gcp_scheduling_preemptible}"
+      automatic_restart = "false"
+    }
 }

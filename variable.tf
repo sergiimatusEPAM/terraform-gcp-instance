@@ -1,9 +1,3 @@
-# project id
-variable "project_id" {}
-
-# region
-variable "region" {}
-
 # Number of Instance
 variable "num_instances" {}
 
@@ -48,4 +42,9 @@ variable "tags" {
 # Format the hostname inputs are index+1, region, name_prefix
 variable "hostname_format" {
   default = "instance-%[1]d-%[2]s"
+}
+
+# Deploy instance with preemptible scheduling. (bool)
+variable "gcp_scheduling_preemptible" {
+  default = "true"
 }

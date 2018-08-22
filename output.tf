@@ -62,3 +62,18 @@ output "private_ips" {
 output "public_ips" {
   value = ["${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"]
 }
+
+# Instance Target Pool
+output "target_pool" {
+  value = "${google_compute_target_pool.instances.self_link}"
+}
+
+# GCP Instance Self Link
+output "instances_self_link" {
+  value = ["${google_compute_instance.instances.*.self_link}"]
+}
+
+# Preemptible Scheduling (bool)
+output "gcp_scheduling_preemptible" {
+  value = "${var.gcp_scheduling_preemptible}"
+}
