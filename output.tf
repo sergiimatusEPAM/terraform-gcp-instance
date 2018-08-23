@@ -55,7 +55,7 @@ output "user_data" {
 
 # SSH User
 output "ssh_user" {
-  value = "${var.ssh_user}"
+  value = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}"
 }
 
 # SSH Public Key
@@ -84,6 +84,6 @@ output "instances_self_link" {
 }
 
 # Preemptible Scheduling (bool)
-output "gcp_scheduling_preemptible" {
-  value = "${var.gcp_scheduling_preemptible}"
+output "scheduling_preemptible" {
+  value = "${var.scheduling_preemptible}"
 }

@@ -14,7 +14,9 @@ variable "dcos_version" {}
 variable "dcos_instance_os" {}
 
 # Private SSH Key Filename Optional
-variable "ssh_private_key_filename" { default = "/dev/null" }
+variable "ssh_private_key_filename" {
+  default = "/dev/null"
+}
 
 # Element by zone list
 variable "zone_list" {
@@ -54,6 +56,6 @@ variable "hostname_format" {
 }
 
 # Deploy instance with preemptible scheduling. (bool)
-variable "gcp_scheduling_preemptible" {
+variable "scheduling_preemptible" {
   default = "true"
 }
