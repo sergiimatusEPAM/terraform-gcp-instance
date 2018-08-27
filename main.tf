@@ -6,9 +6,8 @@ locals {
 }
 
 module "dcos-tested-oses" {
-  #  source  = "dcos-terraform/gcp-tested-oses/template"  #  version = "~> 0.0"
-
-  source = "../terraform-gcp-tested-oses"
+  source  = "dcos-terraform/gcp-tested-oses/template"
+  version = "~> 0.0"
 
   providers = {
     google = "google"
