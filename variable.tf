@@ -48,7 +48,7 @@ variable "public_ssh_key" {}
 
 # Allow stopping for update (bool)
 variable "allow_stopping_for_update" {
-  default = ""
+  default = "true"
 }
 
 # Add special tags to the resources created by this module
