@@ -63,6 +63,11 @@ output "public_ssh_key" {
   value = "${var.public_ssh_key}"
 }
 
+# Allow stopping for update (bool)
+output "allow_stopping_for_update" {
+  value = "${var.allow_stopping_for_update}"
+}
+
 # Private IP Addresses
 output "private_ips" {
   value = ["${google_compute_instance.instances.*.network_interface.0.address}"]

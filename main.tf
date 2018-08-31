@@ -27,11 +27,12 @@ resource "google_compute_target_pool" "instances" {
 }
 
 resource "google_compute_instance" "instances" {
-  count          = "${var.num_instances}"
-  name           = "${format(var.hostname_format, count.index + 1, var.name_prefix)}"
-  machine_type   = "${var.machine_type}"
-  can_ip_forward = false
-  zone           = "${element(var.zone_list, count.index)}"
+  count                     = "${var.num_instances}"
+  name                      = "${format(var.hostname_format, count.index + 1, var.name_prefix)}"
+  machine_type              = "${var.machine_type}"
+  can_ip_forward            = false
+  zone                      = "${element(var.zone_list, count.index)}"
+  allow_stopping_for_update = "${var.allow_stopping_for_update}"
 
   boot_disk {
     initialize_params {
