@@ -37,9 +37,7 @@ resource "google_compute_instance" "instances" {
   boot_disk {
     initialize_params {
       image = "${coalesce(var.image, module.dcos-tested-oses.image_name)}"
-
-      #iimage = "${coalesce(var.image, module.dcos-tested-oses.image_name[count.index])}"
-      type = "${var.disk_type}"
+      type  = "${var.disk_type}"
     }
 
     auto_delete = true
@@ -60,34 +58,6 @@ resource "google_compute_instance" "instances" {
     sshKeys   = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}:${file(var.public_ssh_key)}"
   }
 
-  # OS init script
-  provisioner "file" {
-    content     = "${module.dcos-tested-oses.os-setup}"
-    destination = "/tmp/os-setup.sh"
-
-    connection {
-      user        = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}"
-      private_key = "${local.private_key}"
-      agent       = "${local.agent}"
-    }
-  }
-
-  # We run a remote provisioner on the instance after creating it.
-  # In this case, we just install nginx and start it. By default,
-  # this should be on port 80
-  provisioner "remote-exec" {
-    inline = [
-      "sudo chmod +x /tmp/os-setup.sh",
-      "sudo bash /tmp/os-setup.sh",
-    ]
-
-    connection {
-      user        = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}"
-      private_key = "${local.private_key}"
-      agent       = "${local.agent}"
-    }
-  }
-
   lifecycle {
     ignore_changes = ["labels.Name", "labels.cluster"]
   }
@@ -96,4 +66,29 @@ resource "google_compute_instance" "instances" {
     preemptible       = "${var.scheduling_preemptible}"
     automatic_restart = "false"
   }
+}
+
+resource "null_resource" "instance-prereq" {
+  # If the user supplies an AMI or user_data we expect the prerequisites are met.
+  count = "${var.image == "" ? var.num_instances : 0}"
+
+  connection {
+    user        = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}"
+    private_key = "${local.private_key}"
+    agent       = "${local.agent}"
+  }
+
+  provisioner "file" {
+    content     = "${module.dcos-tested-oses.os-setup}"
+    destination = "/tmp/dcos-prereqs.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/dcos-prereqs.sh",
+      "sudo bash -x /tmp/dcos-prereqs.sh",
+    ]
+  }
+
+  depends_on = ["google_compute_instance.instances"]
 }

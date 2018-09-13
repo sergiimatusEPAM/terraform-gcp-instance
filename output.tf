@@ -92,3 +92,8 @@ output "instances_self_link" {
 output "scheduling_preemptible" {
   value = "${var.scheduling_preemptible}"
 }
+
+# Returns the ID of the prereq script (if user_data or ami are not used)
+output "prereq_id" {
+  value = "${join(",", flatten(list(null_resource.instance-prereq.*.id)))}"
+}
