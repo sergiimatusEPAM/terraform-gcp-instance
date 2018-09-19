@@ -64,5 +64,5 @@ variable "hostname_format" {
 
 # Deploy instance with preemptible scheduling. (bool)
 variable "scheduling_preemptible" {
-  default = "true"
+  default = "false"
 }
