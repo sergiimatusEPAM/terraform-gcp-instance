@@ -1,5 +1,7 @@
 provider "google" {}
 
+data "google_client_config" "current" {}
+
 locals {
   private_key = "${file(var.ssh_private_key_filename)}"
   agent       = "${var.ssh_private_key_filename == "/dev/null" ? true : false}"
@@ -19,7 +21,7 @@ module "dcos-tested-oses" {
 
 resource "google_compute_instance" "instances" {
   count                     = "${var.num_instances}"
-  name                      = "${format(var.hostname_format, count.index + 1, var.name_prefix)}"
+  name                      = "${format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.name_prefix)}"
   machine_type              = "${var.machine_type}"
   can_ip_forward            = false
   zone                      = "${element(var.zone_list, count.index)}"
@@ -42,7 +44,11 @@ resource "google_compute_instance" "instances" {
     }
   }
 
-  tags = ["${var.tags}", "${format(var.hostname_format, count.index + 1, var.name_prefix)}"]
+  tags = ["${concat(var.tags,list(format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.name_prefix), var.name_prefix))}"]
+
+  labels = "${merge(var.labels, map("Name", format(var.hostname_format, (count.index + 1), data.google_client_config.current.region, var.name_prefix),
+                                    "Cluster", var.name_prefix,
+                                    "KubernetesCluster", var.name_prefix))}"
 
   metadata = {
     user-data = "${var.user_data}"

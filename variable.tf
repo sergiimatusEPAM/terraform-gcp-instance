@@ -53,13 +53,20 @@ variable "allow_stopping_for_update" {
 
 # Add special tags to the resources created by this module
 variable "tags" {
-  type    = "list"
-  default = []
+  type        = "list"
+  description = "List of network tags"
+  default     = []
+}
+
+variable "labels" {
+  description = "Add special label to the resources created by this module"
+  type        = "map"
+  default     = {}
 }
 
 # Format the hostname inputs are index+1, region, name_prefix
 variable "hostname_format" {
-  default = "instance-%[1]d-%[2]s"
+  default = "%[3]s-instance%[1]d-%[2]s"
 }
 
 # Deploy instance with preemptible scheduling. (bool)
