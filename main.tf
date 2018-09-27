@@ -80,9 +80,9 @@ resource "google_compute_instance" "instances" {
 
   tags = ["${concat(var.tags,list(format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.name_prefix), var.name_prefix))}"]
 
-  labels = "${merge(var.labels, map("Name", format(var.hostname_format, (count.index + 1), data.google_client_config.current.region, var.name_prefix),
-                                    "Cluster", var.name_prefix,
-                                    "KubernetesCluster", var.name_prefix))}"
+  labels = "${merge(var.labels, map("name", format(var.hostname_format, (count.index + 1), data.google_client_config.current.region, var.name_prefix),
+                                    "cluster", var.name_prefix,
+                                    "kubernetescluster", var.name_prefix))}"
 
   metadata = {
     user-data = "${var.user_data}"
@@ -90,7 +90,7 @@ resource "google_compute_instance" "instances" {
   }
 
   lifecycle {
-    ignore_changes = ["labels.Name", "labels.cluster"]
+    ignore_changes = ["labels.name", "labels.cluster"]
   }
 
   scheduling {

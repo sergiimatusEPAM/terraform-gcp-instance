@@ -26,6 +26,7 @@ variable "dcos_instance_os" {
 # Private SSH Key Filename Optional
 variable "ssh_private_key_filename" {
   description = "Path to the SSH private key"
+
   # cannot leave this empty as the file() interpolation will fail later on for the private_key local variable
   # https://github.com/hashicorp/terraform/issues/15605
   default = "/dev/null"
@@ -34,7 +35,7 @@ variable "ssh_private_key_filename" {
 # Element by zone list
 variable "zone_list" {
   description = "zone list"
-  type = "list"
+  type        = "list"
 }
 
 # Source image to boot from
@@ -75,7 +76,7 @@ variable "public_ssh_key" {
 # Allow stopping for update (bool)
 variable "allow_stopping_for_update" {
   description = "If true, allows Terraform to stop the instance to update its properties"
-  default = "true"
+  default     = "true"
 }
 
 # Add special tags to the resources created by this module
@@ -94,11 +95,11 @@ variable "labels" {
 # Format the hostname inputs are index+1, region, name_prefix
 variable "hostname_format" {
   description = "Format the hostname inputs are index+1, region, cluster_name"
-  default = "%[3]s-instance%[1]d-%[2]s"
+  default     = "%[3]s-instance%[1]d-%[2]s"
 }
 
 # Deploy instance with preemptible scheduling. (bool)
 variable "scheduling_preemptible" {
   description = "scheduling preemptible"
-  default = "false"
+  default     = "false"
 }
