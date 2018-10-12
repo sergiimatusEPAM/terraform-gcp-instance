@@ -4,7 +4,7 @@ variable "num_instances" {
 }
 
 # Cluster Name
-variable "name_prefix" {
+variable "cluster_name" {
   description = "Cluster Name"
 }
 

@@ -36,6 +36,7 @@ module "masters" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | allow_stopping_for_update | If true, allows Terraform to stop the instance to update its properties | string | `true` | no |
+| cluster_name | Cluster Name | string | - | yes |
 | dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | - | yes |
 | dcos_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. | string | - | yes |
 | disk_size | disk size | string | - | yes |
@@ -45,7 +46,6 @@ module "masters" {
 | instance_subnetwork_name | instance subnetwork name | string | - | yes |
 | labels | Add custom labels to all resources | map | `<map>` | no |
 | machine_type | machine type | string | - | yes |
-| name_prefix | Cluster Name | string | - | yes |
 | num_instances | num instances | string | - | yes |
 | public_ssh_key | public ssh key | string | - | yes |
 | scheduling_preemptible | scheduling preemptible | string | `false` | no |

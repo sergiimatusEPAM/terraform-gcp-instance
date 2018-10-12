@@ -55,7 +55,7 @@ module "dcos-tested-oses" {
 
 resource "google_compute_instance" "instances" {
   count                     = "${var.num_instances}"
-  name                      = "${format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.name_prefix)}"
+  name                      = "${format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.cluster_name)}"
   machine_type              = "${var.machine_type}"
   can_ip_forward            = false
   zone                      = "${element(var.zone_list, count.index)}"
@@ -78,11 +78,11 @@ resource "google_compute_instance" "instances" {
     }
   }
 
-  tags = ["${concat(var.tags,list(format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.name_prefix), var.name_prefix))}"]
+  tags = ["${concat(var.tags,list(format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.cluster_name), var.cluster_name))}"]
 
-  labels = "${merge(var.labels, map("name", format(var.hostname_format, (count.index + 1), data.google_client_config.current.region, var.name_prefix),
-                                    "cluster", var.name_prefix,
-                                    "kubernetescluster", var.name_prefix))}"
+  labels = "${merge(var.labels, map("name", format(var.hostname_format, (count.index + 1), data.google_client_config.current.region, var.cluster_name),
+                                    "cluster", var.cluster_name,
+                                    "kubernetescluster", var.cluster_name))}"
 
   metadata = {
     user-data = "${var.user_data}"
