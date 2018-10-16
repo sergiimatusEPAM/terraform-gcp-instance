@@ -65,6 +65,7 @@ resource "google_compute_instance" "instances" {
     initialize_params {
       image = "${coalesce(var.image, module.dcos-tested-oses.image_name)}"
       type  = "${var.disk_type}"
+      size  = "${var.disk_size}"
     }
 
     auto_delete = true
