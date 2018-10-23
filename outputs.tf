@@ -1,6 +1,6 @@
 # Number of Instance
 output "num_instances" {
-  description = "num instances"
+  description = "How many instances should be created"
   value       = "${var.num_instances}"
 }
 
@@ -12,7 +12,7 @@ output "name_prefix" {
 
 # Instance Type
 output "machine_type" {
-  description = "machine type"
+  description = "Instance Type"
   value       = "${var.machine_type}"
 }
 
@@ -30,31 +30,31 @@ output "dcos_instance_os" {
 
 # Element by zone list
 output "zone_list" {
-  description = "zone list"
+  description = "Element by zone list"
   value       = "${var.zone_list}"
 }
 
 # Source image to boot from
 output "image" {
-  description = "image"
+  description = "Source image to boot from"
   value       = "${var.image}"
 }
 
 # Disk Type to Leverage
 output "disk_type" {
-  description = "Disk Type to Leverage. The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional)"
+  description = "Disk Type to Leverage"
   value       = "${var.disk_type}"
 }
 
 # Disk Size in GB
 output "disk_size" {
-  description = "disk size"
+  description = "Disk Size in GB"
   value       = "${var.disk_size}"
 }
 
 # Instance Subnetwork Name
 output "instance_subnetwork_name" {
-  description = "instance subnetwork name"
+  description = "Instance Subnetwork Name"
   value       = "${var.instance_subnetwork_name}"
 }
 
@@ -66,13 +66,13 @@ output "user_data" {
 
 # SSH User
 output "ssh_user" {
-  description = "ssh user"
+  description = "SSH User"
   value       = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}"
 }
 
 # SSH Public Key
 output "public_ssh_key" {
-  description = "public ssh key"
+  description = "SSH Public Key"
   value       = "${var.public_ssh_key}"
 }
 
@@ -102,12 +102,12 @@ output "instances_self_link" {
 
 # Preemptible Scheduling (bool)
 output "scheduling_preemptible" {
-  description = "scheduling preemptible"
+  description = "Deploy instance with preemptible scheduling. (bool)"
   value       = "${var.scheduling_preemptible}"
 }
 
 # Returns the ID of the prereq script (if user_data or ami are not used)
 output "prereq_id" {
-  description = "prereq id"
+  description = "Prereq id used for dependency"
   value       = "${join(",", flatten(list(null_resource.instance-prereq.*.id)))}"
 }
