@@ -30,7 +30,6 @@ module "masters" {
 }
 ```
 
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -59,20 +58,20 @@ module "masters" {
 
 | Name | Description |
 |------|-------------|
-| allow_stopping_for_update | Allow stopping for update (bool) |
+| allow_stopping_for_update | If true, allows Terraform to stop the instance to update its properties |
 | dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. |
-| dcos_version | DCOS Version for prereq install |
+| dcos_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. |
 | disk_size | Disk Size in GB |
 | disk_type | Disk Type to Leverage |
 | image | Source image to boot from |
 | instance_subnetwork_name | Instance Subnetwork Name |
-| instances_self_link | GCP Instance Self Link |
+| instances_self_link | List of instance self links |
 | machine_type | Instance Type |
 | name_prefix | Cluster Name |
 | num_instances | How many instances should be created |
 | prereq_id | Prereq id used for dependency |
-| private_ips | Private IP Addresses |
-| public_ips | Public IP Addresses |
+| private_ips | List of private ip addresses created by this module |
+| public_ips | List of public ip addresses created by this module |
 | public_ssh_key | SSH Public Key |
 | scheduling_preemptible | Deploy instance with preemptible scheduling. (bool) |
 | ssh_user | SSH User |
