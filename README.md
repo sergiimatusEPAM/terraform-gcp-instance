@@ -30,52 +30,51 @@ module "masters" {
 }
 ```
 
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | allow_stopping_for_update | If true, allows Terraform to stop the instance to update its properties | string | `true` | no |
-| cluster_name | Cluster Name | string | - | yes |
+| cluster_name | Name of the DC/OS cluster | string | - | yes |
 | dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | - | yes |
 | dcos_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. | string | - | yes |
-| disk_size | disk size | string | - | yes |
-| disk_type | Disk Type to Leverage. The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) | string | - | yes |
+| disk_size | Disk Size in GB | string | - | yes |
+| disk_type | Disk Type to Leverage | string | - | yes |
 | hostname_format | Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-instance%[1]d-%[2]s` | no |
-| image | image | string | - | yes |
-| instance_subnetwork_name | instance subnetwork name | string | - | yes |
+| image | Source image to boot from | string | - | yes |
+| instance_subnetwork_name | Instance Subnetwork Name | string | - | yes |
 | labels | Add custom labels to all resources | map | `<map>` | no |
-| machine_type | machine type | string | - | yes |
-| num_instances | num instances | string | - | yes |
-| public_ssh_key | public ssh key | string | - | yes |
-| scheduling_preemptible | scheduling preemptible | string | `false` | no |
+| machine_type | Instance Type | string | - | yes |
+| num_instances | How many instances should be created | string | - | yes |
+| public_ssh_key | SSH Public Key | string | - | yes |
+| scheduling_preemptible | Deploy instance with preemptible scheduling. (bool) | string | `false` | no |
 | ssh_private_key_filename | Path to the SSH private key | string | `/dev/null` | no |
-| ssh_user | ssh user | string | - | yes |
+| ssh_user | SSH User | string | - | yes |
 | tags | Add custom tags to all resources | list | `<list>` | no |
 | user_data | User data to be used on these instances (cloud-init) | string | - | yes |
-| zone_list | zone list | list | - | yes |
+| zone_list | Element by zone list | list | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| allow_stopping_for_update | Allow stopping for update (bool) |
-| dcos_instance_os | Tested OSes to install with prereq |
-| dcos_version | DCOS Version for prereq install |
+| allow_stopping_for_update | If true, allows Terraform to stop the instance to update its properties |
+| dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. |
+| dcos_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. |
 | disk_size | Disk Size in GB |
 | disk_type | Disk Type to Leverage |
 | image | Source image to boot from |
 | instance_subnetwork_name | Instance Subnetwork Name |
-| instances_self_link | GCP Instance Self Link |
+| instances_self_link | List of instance self links |
 | machine_type | Instance Type |
 | name_prefix | Cluster Name |
-| num_instances | Number of Instance |
-| prereq_id | Returns the ID of the prereq script (if user_data or ami are not used) |
-| private_ips | Private IP Addresses |
-| public_ips | Public IP Addresses |
+| num_instances | How many instances should be created |
+| prereq_id | Prereq id used for dependency |
+| private_ips | List of private ip addresses created by this module |
+| public_ips | List of public ip addresses created by this module |
 | public_ssh_key | SSH Public Key |
-| scheduling_preemptible | Preemptible Scheduling (bool) |
+| scheduling_preemptible | Deploy instance with preemptible scheduling. (bool) |
 | ssh_user | SSH User |
-| user_data | Customer Provided Userdata |
+| user_data | User data to be used on these instances (cloud-init) |
 | zone_list | Element by zone list |
 

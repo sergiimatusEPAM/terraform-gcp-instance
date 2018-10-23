@@ -1,16 +1,16 @@
 # Number of Instance
 variable "num_instances" {
-  description = "num instances"
+  description = "How many instances should be created"
 }
 
 # Cluster Name
 variable "cluster_name" {
-  description = "Cluster Name"
+  description = "Name of the DC/OS cluster"
 }
 
 # Instance Type
 variable "machine_type" {
-  description = "machine type"
+  description = "Instance Type"
 }
 
 # DCOS Version for prereq install
@@ -34,28 +34,28 @@ variable "ssh_private_key_filename" {
 
 # Element by zone list
 variable "zone_list" {
-  description = "zone list"
+  description = "Element by zone list"
   type        = "list"
 }
 
 # Source image to boot from
 variable "image" {
-  description = "image"
+  description = "Source image to boot from"
 }
 
 # Disk Type to Leverage. The GCE disk type. Can be either "pd-ssd", "local-ssd", or "pd-standard". (optional)
 variable "disk_type" {
-  description = "Disk Type to Leverage. The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional)"
+  description = "Disk Type to Leverage"
 }
 
 # Disk Size in GB
 variable "disk_size" {
-  description = "disk size"
+  description = "Disk Size in GB"
 }
 
 # Instance Subnetwork Name
 variable "instance_subnetwork_name" {
-  description = "instance subnetwork name"
+  description = "Instance Subnetwork Name"
 }
 
 # Customer Provided Userdata
@@ -65,12 +65,12 @@ variable "user_data" {
 
 # SSH User
 variable "ssh_user" {
-  description = "ssh user"
+  description = "SSH User"
 }
 
 # SSH Public Key
 variable "public_ssh_key" {
-  description = "public ssh key"
+  description = "SSH Public Key"
 }
 
 # Allow stopping for update (bool)
@@ -100,6 +100,6 @@ variable "hostname_format" {
 
 # Deploy instance with preemptible scheduling. (bool)
 variable "scheduling_preemptible" {
-  description = "scheduling preemptible"
+  description = "Deploy instance with preemptible scheduling. (bool)"
   default     = "false"
 }
