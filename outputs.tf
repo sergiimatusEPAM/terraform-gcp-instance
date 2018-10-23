@@ -34,7 +34,7 @@ output "image" {
 }
 
 output "disk_type" {
-  description = "Disk Type to Leverage"
+  description = "Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional)"
   value       = "${var.disk_type}"
 }
 

@@ -63,7 +63,7 @@ module "masters" {
 | dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. |
 | dcos_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. |
 | disk_size | Disk Size in GB |
-| disk_type | Disk Type to Leverage |
+| disk_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) |
 | image | Source image to boot from |
 | instance_subnetwork_name | Instance Subnetwork Name |
 | instances_self_link | List of instance self links |
