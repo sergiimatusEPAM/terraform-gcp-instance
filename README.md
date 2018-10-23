@@ -30,6 +30,7 @@ module "masters" {
 }
 ```
 
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
