@@ -9,7 +9,7 @@
  *```hcl
  * module "masters" {
  *   source  = "dcos-terraform/instance/gcp"
- *   version = "~> 0.0"
+ *   version = "~> 0.1.0"
  *
  *   providers = {
  *     google = "google"
@@ -43,7 +43,7 @@ locals {
 
 module "dcos-tested-oses" {
   source  = "dcos-terraform/gcp-tested-oses/template"
-  version = "~> 0.0"
+  version = "~> 0.1.0"
 
   providers = {
     google = "google"

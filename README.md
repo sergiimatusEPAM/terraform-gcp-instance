@@ -8,7 +8,7 @@ Creates generic instances for DC/OS nodes
 ```hcl
 module "masters" {
   source  = "dcos-terraform/instance/gcp"
-  version = "~> 0.0"
+  version = "~> 0.1.0"
 
   providers = {
     google = "google"
