@@ -42,7 +42,7 @@ locals {
 }
 
 module "dcos-tested-oses" {
-  source  = "dcos-terraform/gcp-tested-oses/template"
+  source  = "dcos-terraform/tested-oses/gcp"
   version = "~> 0.1.0"
 
   providers = {
