@@ -103,7 +103,7 @@ resource "google_compute_instance" "instances" {
 resource "null_resource" "instance-prereq" {
   # Changes to any instance of the cluster requires re-provisioning
   triggers {
-    current_ec2_instance_id = "${element(google_compute_instance.instances.*.id, count.index)}"
+    current_instance_id = "${element(google_compute_instance.instances.*.id, count.index)}"
   }
 
   # If the user supplies an AMI or user_data we expect the prerequisites are met.
