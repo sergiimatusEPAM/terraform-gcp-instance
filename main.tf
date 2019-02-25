@@ -105,7 +105,7 @@ resource "null_resource" "instance-prereq" {
   count = "${var.image == "" ? var.num_instances : 0}"
 
   connection {
-    host        = "${element(google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip, count.index)}"
+    host        = "${element(google_compute_instance.instances.*.network_interface.0.access_config.0.nat_ip, count.index)}"
     user        = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}"
     private_key = "${local.private_key}"
     agent       = "${local.agent}"
