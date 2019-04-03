@@ -8,7 +8,7 @@ Creates generic instances for DC/OS nodes
 ```hcl
 module "masters" {
   source  = "dcos-terraform/instance/gcp"
-  version = "~> 0.1.0"
+  version = "~> 0.2.0"
 
   providers = {
     google = "google"
@@ -78,4 +78,3 @@ module "masters" {
 | ssh_user | SSH User |
 | user_data | User data to be used on these instances (cloud-init) |
 | zone_list | Element by zone list |
-
