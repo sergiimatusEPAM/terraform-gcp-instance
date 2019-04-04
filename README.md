@@ -30,51 +30,51 @@ module "masters" {
 }
 ```
 
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| allow_stopping_for_update | If true, allows Terraform to stop the instance to update its properties | string | `true` | no |
-| cluster_name | Name of the DC/OS cluster | string | - | yes |
-| dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | - | yes |
-| dcos_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. | string | - | yes |
-| disk_size | Disk Size in GB | string | - | yes |
-| disk_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) | string | - | yes |
-| hostname_format | Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-instance%[1]d-%[2]s` | no |
-| image | Source image to boot from | string | - | yes |
-| instance_subnetwork_name | Instance Subnetwork Name | string | - | yes |
+| allow\_stopping\_for\_update | If true, allows Terraform to stop the instance to update its properties | string | `"true"` | no |
+| cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
+| dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | n/a | yes |
+| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. | string | n/a | yes |
+| disk\_size | Disk Size in GB | string | n/a | yes |
+| disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) | string | n/a | yes |
+| hostname\_format | Format the hostname inputs are index+1, region, cluster_name | string | `"%[3]s-instance%[1]d-%[2]s"` | no |
+| image | Source image to boot from | string | n/a | yes |
+| instance\_subnetwork\_name | Instance Subnetwork Name | string | n/a | yes |
 | labels | Add custom labels to all resources | map | `<map>` | no |
-| machine_type | Instance Type | string | - | yes |
-| num_instances | How many instances should be created | string | - | yes |
-| public_ssh_key | SSH Public Key | string | - | yes |
-| scheduling_preemptible | Deploy instance with preemptible scheduling. (bool) | string | `false` | no |
-| ssh_private_key_filename | Path to the SSH private key | string | `/dev/null` | no |
-| ssh_user | SSH User | string | - | yes |
+| machine\_type | Instance Type | string | n/a | yes |
+| num\_instances | How many instances should be created | string | n/a | yes |
+| public\_ssh\_key | SSH Public Key | string | n/a | yes |
+| scheduling\_preemptible | Deploy instance with preemptible scheduling. (bool) | string | `"false"` | no |
+| ssh\_private\_key\_filename | Path to the SSH private key | string | `"/dev/null"` | no |
+| ssh\_user | SSH User | string | n/a | yes |
 | tags | Add custom tags to all resources | list | `<list>` | no |
-| user_data | User data to be used on these instances (cloud-init) | string | - | yes |
-| zone_list | Element by zone list | list | - | yes |
+| user\_data | User data to be used on these instances (cloud-init) | string | n/a | yes |
+| zone\_list | Element by zone list | list | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| allow_stopping_for_update | If true, allows Terraform to stop the instance to update its properties |
-| dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. |
-| dcos_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. |
-| disk_size | Disk Size in GB |
-| disk_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) |
+| allow\_stopping\_for\_update | If true, allows Terraform to stop the instance to update its properties |
+| dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. |
+| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. |
+| disk\_size | Disk Size in GB |
+| disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) |
 | image | Source image to boot from |
-| instance_subnetwork_name | Instance Subnetwork Name |
-| instances_self_link | List of instance self links |
-| machine_type | Instance Type |
-| name_prefix | Cluster Name |
-| num_instances | How many instances should be created |
-| prereq_id | Prereq id used for dependency |
-| private_ips | List of private ip addresses created by this module |
-| public_ips | List of public ip addresses created by this module |
-| public_ssh_key | SSH Public Key |
-| scheduling_preemptible | Deploy instance with preemptible scheduling. (bool) |
-| ssh_user | SSH User |
-| user_data | User data to be used on these instances (cloud-init) |
-| zone_list | Element by zone list |
+| instance\_subnetwork\_name | Instance Subnetwork Name |
+| instances\_self\_link | List of instance self links |
+| machine\_type | Instance Type |
+| name\_prefix | Cluster Name |
+| num\_instances | How many instances should be created |
+| prereq\_id | Prereq id used for dependency |
+| private\_ips | List of private ip addresses created by this module |
+| public\_ips | List of public ip addresses created by this module |
+| public\_ssh\_key | SSH Public Key |
+| scheduling\_preemptible | Deploy instance with preemptible scheduling. (bool) |
+| ssh\_user | SSH User |
+| user\_data | User data to be used on these instances (cloud-init) |
+| zone\_list | Element by zone list |
+
