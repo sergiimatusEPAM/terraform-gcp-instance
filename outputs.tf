@@ -90,5 +90,5 @@ output "scheduling_preemptible" {
 
 output "prereq_id" {
   description = "Prereq id used for dependency"
-  value       = "${join(",", flatten(list(null_resource.instance-prereq.*.id)))}"
+  value       = ""
 }
