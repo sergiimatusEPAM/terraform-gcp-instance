@@ -4,7 +4,7 @@ output "num_instances" {
 }
 
 output "name_prefix" {
-  description = "Cluster Name"
+  description = "Name Prefix"
   value       = "${var.cluster_name}"
 }
 
@@ -14,7 +14,7 @@ output "machine_type" {
 }
 
 output "dcos_version" {
-  description = "Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list."
+  description = "Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list."
   value       = "${var.dcos_version}"
 }
 
