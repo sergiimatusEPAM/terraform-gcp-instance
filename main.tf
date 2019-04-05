@@ -99,29 +99,3 @@ resource "google_compute_instance" "instances" {
     automatic_restart = "false"
   }
 }
-
-resource "null_resource" "instance-prereq" {
-  # If the user supplies an AMI or user_data we expect the prerequisites are met.
-  count = "${var.image == "" ? var.num_instances : 0}"
-
-  connection {
-    host        = "${element(google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip, count.index)}"
-    user        = "${coalesce(var.ssh_user, module.dcos-tested-oses.user)}"
-    private_key = "${local.private_key}"
-    agent       = "${local.agent}"
-  }
-
-  provisioner "file" {
-    content     = "${module.dcos-tested-oses.os-setup}"
-    destination = "/tmp/dcos-prereqs.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/dcos-prereqs.sh",
-      "sudo bash -x /tmp/dcos-prereqs.sh",
-    ]
-  }
-
-  depends_on = ["google_compute_instance.instances"]
-}
