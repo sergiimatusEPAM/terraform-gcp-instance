@@ -34,25 +34,25 @@ module "masters" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| allow\_stopping\_for\_update | If true, allows Terraform to stop the instance to update its properties | string | `"true"` | no |
 | cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | n/a | yes |
 | dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list. | string | n/a | yes |
 | disk\_size | Disk Size in GB | string | n/a | yes |
 | disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) | string | n/a | yes |
-| hostname\_format | Format the hostname inputs are index+1, region, cluster_name | string | `"%[3]s-instance%[1]d-%[2]s"` | no |
 | image | Source image to boot from | string | n/a | yes |
 | instance\_subnetwork\_name | Instance Subnetwork Name | string | n/a | yes |
-| labels | Add custom labels to all resources | map | `<map>` | no |
 | machine\_type | Instance Type | string | n/a | yes |
 | num\_instances | How many instances should be created | string | n/a | yes |
 | public\_ssh\_key | SSH Public Key | string | n/a | yes |
-| scheduling\_preemptible | Deploy instance with preemptible scheduling. (bool) | string | `"false"` | no |
-| ssh\_private\_key\_filename | Path to the SSH private key | string | `"/dev/null"` | no |
 | ssh\_user | SSH User | string | n/a | yes |
-| tags | Add custom tags to all resources | list | `<list>` | no |
 | user\_data | User data to be used on these instances (cloud-init) | string | n/a | yes |
 | zone\_list | Element by zone list | list | n/a | yes |
+| allow\_stopping\_for\_update | If true, allows Terraform to stop the instance to update its properties | string | `"true"` | no |
+| hostname\_format | Format the hostname inputs are index+1, region, cluster_name | string | `"%[3]s-instance%[1]d-%[2]s"` | no |
+| labels | Add custom labels to all resources | map | `<map>` | no |
+| scheduling\_preemptible | Deploy instance with preemptible scheduling. (bool) | string | `"false"` | no |
+| ssh\_private\_key\_filename | Path to the SSH private key | string | `"/dev/null"` | no |
+| tags | Add custom tags to all resources | list | `<list>` | no |
 
 ## Outputs
 
