@@ -36,7 +36,7 @@ module "masters" {
 |------|-------------|:----:|:-----:|:-----:|
 | cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | n/a | yes |
-| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. | string | n/a | yes |
+| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list. | string | n/a | yes |
 | disk\_size | Disk Size in GB | string | n/a | yes |
 | disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) | string | n/a | yes |
 | image | Source image to boot from | string | n/a | yes |
