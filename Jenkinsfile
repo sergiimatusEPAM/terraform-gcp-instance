@@ -1,4 +1,4 @@
 #!/usr/bin/env groovy
-@Library('jenkins-library@master') _
+@Library('jenkins-library@gcp_enable_shared_pipeline') _
 
 terraform()
