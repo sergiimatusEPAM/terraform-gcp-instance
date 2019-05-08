@@ -36,7 +36,7 @@ module "masters" {
 |------|-------------|:----:|:-----:|:-----:|
 | cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | n/a | yes |
-| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. | string | n/a | yes |
+| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list. | string | n/a | yes |
 | disk\_size | Disk Size in GB | string | n/a | yes |
 | disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) | string | n/a | yes |
 | image | Source image to boot from | string | n/a | yes |
@@ -60,14 +60,14 @@ module "masters" {
 |------|-------------|
 | allow\_stopping\_for\_update | If true, allows Terraform to stop the instance to update its properties |
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. |
-| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.9.0, 1.8.8, etc. See dcos_download_path or dcos_version tree for a full list. |
+| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list. |
 | disk\_size | Disk Size in GB |
 | disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) |
 | image | Source image to boot from |
 | instance\_subnetwork\_name | Instance Subnetwork Name |
 | instances\_self\_link | List of instance self links |
 | machine\_type | Instance Type |
-| name\_prefix | Cluster Name |
+| name\_prefix | Name Prefix |
 | num\_instances | How many instances should be created |
 | prereq\_id | Prereq id used for dependency |
 | private\_ips | List of private ip addresses created by this module |
