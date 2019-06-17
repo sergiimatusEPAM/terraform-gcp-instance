@@ -86,3 +86,8 @@ variable "scheduling_preemptible" {
   description = "Deploy instance with preemptible scheduling. (bool)"
   default     = "false"
 }
+
+variable "name_prefix" {
+  description = "Name Prefix"
+  default     = ""
+}

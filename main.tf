@@ -36,9 +36,11 @@ provider "google" {}
 
 data "google_client_config" "current" {}
 
+// If name_prefix exists, merge it into the cluster_name
 locals {
-  private_key = "${file(var.ssh_private_key_filename)}"
-  agent       = "${var.ssh_private_key_filename == "/dev/null" ? true : false}"
+  cluster_name = "${var.name_prefix != "" ? "${var.name_prefix}-${var.cluster_name}" : var.cluster_name}"
+  private_key  = "${file(var.ssh_private_key_filename)}"
+  agent        = "${var.ssh_private_key_filename == "/dev/null" ? true : false}"
 }
 
 module "dcos-tested-oses" {
@@ -55,7 +57,7 @@ module "dcos-tested-oses" {
 
 resource "google_compute_instance" "instances" {
   count                     = "${var.num_instances}"
-  name                      = "${format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.cluster_name)}"
+  name                      = "${format(var.hostname_format, count.index + 1, data.google_client_config.current.region, local.cluster_name)}"
   machine_type              = "${var.machine_type}"
   can_ip_forward            = false
   zone                      = "${element(var.zone_list, count.index)}"
@@ -79,11 +81,11 @@ resource "google_compute_instance" "instances" {
     }
   }
 
-  tags = ["${concat(var.tags,list(format(var.hostname_format, count.index + 1, data.google_client_config.current.region, var.cluster_name), var.cluster_name))}"]
+  tags = ["${concat(var.tags,list(format(var.hostname_format, count.index + 1, data.google_client_config.current.region, local.cluster_name), local.cluster_name))}"]
 
-  labels = "${merge(var.labels, map("name", format(var.hostname_format, (count.index + 1), data.google_client_config.current.region, var.cluster_name),
-                                    "cluster", var.cluster_name,
-                                    "kubernetescluster", var.cluster_name))}"
+  labels = "${merge(var.labels, map("name", format(var.hostname_format, (count.index + 1), data.google_client_config.current.region, local.cluster_name),
+                                    "cluster", local.cluster_name,
+                                    "kubernetescluster", local.cluster_name))}"
 
   metadata = {
     user-data = "${var.user_data}"
