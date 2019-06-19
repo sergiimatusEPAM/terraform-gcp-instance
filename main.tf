@@ -62,7 +62,6 @@ resource "google_compute_instance" "instances" {
   can_ip_forward            = false
   zone                      = "${element(var.zone_list, count.index)}"
   allow_stopping_for_update = "${var.allow_stopping_for_update}"
-  on_host_maintenance       = "${local.on_host_maintenance}"
 
   boot_disk {
     initialize_params {
@@ -98,8 +97,9 @@ resource "google_compute_instance" "instances" {
   }
 
   scheduling {
-    preemptible       = "${var.scheduling_preemptible}"
-    automatic_restart = "false"
+    preemptible         = "${var.scheduling_preemptible}"
+    on_host_maintenance = "${local.on_host_maintenance}"
+    automatic_restart   = "false"
   }
 
   guest_accelerator {
