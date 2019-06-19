@@ -52,8 +52,7 @@ module "dcos-tested-oses" {
     google = "google"
   }
 
-  os           = "${var.dcos_instance_os}"
-  dcos_version = "${var.dcos_version}"
+  os = "${var.dcos_instance_os}"
 }
 
 resource "google_compute_instance" "instances" {
