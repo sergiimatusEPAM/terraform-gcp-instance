@@ -79,8 +79,8 @@ variable "hostname_format" {
 }
 
 variable "scheduling_preemptible" {
-  description = "Deploy instance with preemptible scheduling. (bool)"
-  default     = "false"
+  description = "Deploy instance with preemptible scheduling."
+  default     = false
 }
 
 variable "guest_accelerator_type" {
