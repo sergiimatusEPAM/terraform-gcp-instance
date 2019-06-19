@@ -97,8 +97,10 @@ resource "google_compute_instance" "instances" {
   }
 
   scheduling {
-    preemptible         = "${var.scheduling_preemptible}"
-    on_host_maintenance = "${local.on_host_maintenance}"
+    preemptible = "${var.scheduling_preemptible}"
+
+    # it always needs to be "TERMINATE as soon as preemptible is set to true."
+    on_host_maintenance = "${var.scheduling_preemptible ? "TERMINATE" : local.on_host_maintenance}"
     automatic_restart   = "false"
   }
 
