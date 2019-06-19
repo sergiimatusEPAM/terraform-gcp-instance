@@ -38,9 +38,10 @@ data "google_client_config" "current" {}
 
 // If name_prefix exists, merge it into the cluster_name
 locals {
-  cluster_name = "${var.name_prefix != "" ? "${var.name_prefix}-${var.cluster_name}" : var.cluster_name}"
-  private_key  = "${file(var.ssh_private_key_filename)}"
-  agent        = "${var.ssh_private_key_filename == "/dev/null" ? true : false}"
+  cluster_name        = "${var.name_prefix != "" ? "${var.name_prefix}-${var.cluster_name}" : var.cluster_name}"
+  private_key         = "${file(var.ssh_private_key_filename)}"
+  agent               = "${var.ssh_private_key_filename == "/dev/null" ? true : false}"
+  on_host_maintenance = "${var.guest_accelerator_count > 0 ? "TERMINATE" : "MIGRATE"}"
 }
 
 module "dcos-tested-oses" {
@@ -62,6 +63,7 @@ resource "google_compute_instance" "instances" {
   can_ip_forward            = false
   zone                      = "${element(var.zone_list, count.index)}"
   allow_stopping_for_update = "${var.allow_stopping_for_update}"
+  on_host_maintenance       = "${local.on_host_maintenance}"
 
   boot_disk {
     initialize_params {
@@ -99,5 +101,10 @@ resource "google_compute_instance" "instances" {
   scheduling {
     preemptible       = "${var.scheduling_preemptible}"
     automatic_restart = "false"
+  }
+
+  guest_accelerator {
+    type  = "${var.guest_accelerator_type}"
+    count = "${var.guest_accelerator_count}"
   }
 }
