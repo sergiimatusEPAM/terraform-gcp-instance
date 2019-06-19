@@ -13,11 +13,6 @@ output "machine_type" {
   value       = "${var.machine_type}"
 }
 
-output "dcos_version" {
-  description = "Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list."
-  value       = "${var.dcos_version}"
-}
-
 output "dcos_instance_os" {
   description = "Operating system to use. Instead of using your own AMI you could use a provided OS."
   value       = "${var.dcos_instance_os}"
