@@ -36,7 +36,6 @@ module "masters" {
 |------|-------------|:----:|:-----:|:-----:|
 | cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | n/a | yes |
-| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list. | string | n/a | yes |
 | disk\_size | Disk Size in GB | string | n/a | yes |
 | disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) | string | n/a | yes |
 | image | Source image to boot from | string | n/a | yes |
@@ -48,8 +47,11 @@ module "masters" {
 | user\_data | User data to be used on these instances (cloud-init) | string | n/a | yes |
 | zone\_list | Element by zone list | list | n/a | yes |
 | allow\_stopping\_for\_update | If true, allows Terraform to stop the instance to update its properties | string | `"true"` | no |
+| guest\_accelerator\_count | Count of guest accelerator type | string | `"0"` | no |
+| guest\_accelerator\_type | Type of guest accelerator | string | `"nvidia-tesla-k80"` | no |
 | hostname\_format | Format the hostname inputs are index+1, region, cluster_name | string | `"%[3]s-instance%[1]d-%[2]s"` | no |
 | labels | Add custom labels to all resources | map | `<map>` | no |
+| name\_prefix | Name Prefix | string | `""` | no |
 | scheduling\_preemptible | Deploy instance with preemptible scheduling. (bool) | string | `"false"` | no |
 | ssh\_private\_key\_filename | Path to the SSH private key | string | `"/dev/null"` | no |
 | tags | Add custom tags to all resources | list | `<list>` | no |
@@ -60,7 +62,6 @@ module "masters" {
 |------|-------------|
 | allow\_stopping\_for\_update | If true, allows Terraform to stop the instance to update its properties |
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. |
-| dcos\_version | Specifies which DC/OS version instruction to use. Options: 1.12.3, 1.11.10, etc. See dcos_download_path or dcos_version tree for a full list. |
 | disk\_size | Disk Size in GB |
 | disk\_type | Disk Type to Leverage The GCE disk type. Can be either 'pd-ssd', 'local-ssd', or 'pd-standard'. (optional) |
 | image | Source image to boot from |

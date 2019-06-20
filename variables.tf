@@ -79,7 +79,7 @@ variable "hostname_format" {
 }
 
 variable "scheduling_preemptible" {
-  description = "Deploy instance with preemptible scheduling."
+  description = "Deploy instance with preemptible scheduling. (bool)"
   default     = false
 }
 
