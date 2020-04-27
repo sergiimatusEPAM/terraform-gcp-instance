@@ -88,10 +88,10 @@ resource "google_compute_instance" "instances" {
                                     "kubernetescluster", local.cluster_name))}"
 
   metadata = {
-    user-data                     = "${var.enable_windows_agents} ? \"\" : ${var.user_data}"
-    sshKeys                       = "${var.enable_windows_agents} ? \"\" : ${join(":", list(coalesce(var.ssh_user, module.dcos-tested-oses.user),file(var.public_ssh_key)))}"
-    sysprep-specialize-script-cmd = "${var.enable_windows_agents} ? \"winrm quickconfig -q & winrm set winrm/config @{MaxTimeoutms=\"1800000\"} & winrm set winrm/config/service @{AllowUnencrypted=\"true\"} & winrm set winrm/config/service/auth @{Basic=\"true\"} & powershell.exe -Command \"&{ $hostname = $(Invoke-RestMethod -Headers @{'Metadata-Flavor'='Google'} -URI 'http://metadata.google.internal/computeMetadata/v1/instance/hostname'); New-SelfSignedCertificate -DnsName $hostname -CertStoreLocation Cert:\\LocalMachine\\My; New-Item WSMan:\\localhost\\Listener -Address * -Transport HTTPS -HostName $hostname -CertificateThumbPrint $(ls Cert:\\LocalMachine\\My).Thumbprint -Force; Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False; Set-MpPreference -DisableRealtimeMonitoring $true; Enable-PSRemoting -Force }\"\" : \"\" "
-    windows-startup-script-cmd    = "${var.enable_windows_agents} ? \"net user /add ${var.admin_username} \"${element(var.admin_password_list, count.index)}\" /Y & net localgroup administrators ${var.admin_username} /add\" : \"\" "
+    user-data                     = "${var.enable_windows_agents} == true ? \"\" : ${var.user_data}"
+    sshKeys                       = "${var.enable_windows_agents} == true ? \"\" : ${join(":", list(coalesce(var.ssh_user, module.dcos-tested-oses.user),file(var.public_ssh_key)))}"
+    sysprep-specialize-script-cmd = "${var.enable_windows_agents} == true ? \"winrm quickconfig -q & winrm set winrm/config @{MaxTimeoutms=\"1800000\"} & winrm set winrm/config/service @{AllowUnencrypted=\"true\"} & winrm set winrm/config/service/auth @{Basic=\"true\"} & powershell.exe -Command \"&{ $hostname = $(Invoke-RestMethod -Headers @{'Metadata-Flavor'='Google'} -URI 'http://metadata.google.internal/computeMetadata/v1/instance/hostname'); New-SelfSignedCertificate -DnsName $hostname -CertStoreLocation Cert:\\LocalMachine\\My; New-Item WSMan:\\localhost\\Listener -Address * -Transport HTTPS -HostName $hostname -CertificateThumbPrint $(ls Cert:\\LocalMachine\\My).Thumbprint -Force; Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False; Set-MpPreference -DisableRealtimeMonitoring $true; Enable-PSRemoting -Force }\"\" : \"\" "
+    windows-startup-script-cmd    = "${var.enable_windows_agents} == true ? \"net user /add ${var.admin_username} \"${element(var.admin_password_list, count.index)}\" /Y & net localgroup administrators ${var.admin_username} /add\" : \"\" "
   }
 
   lifecycle {

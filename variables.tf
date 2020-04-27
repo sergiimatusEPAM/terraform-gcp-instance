@@ -100,7 +100,7 @@ variable "name_prefix" {
 
 variable "enable_windows_agents" {
   description = "If set to true, enable windows agents deployment"
-  type        = "bool"
+  type        = "string"
   default     = false
 }
 
