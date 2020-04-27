@@ -97,3 +97,19 @@ variable "name_prefix" {
   description = "Name Prefix"
   default     = ""
 }
+
+variable "enable_windows_agents" {
+  description = "If set to true, enable windows agents deployment"
+  type        = "bool"
+  default     = false
+}
+
+variable "admin_username" {
+  description = "Windows Admin Username"
+  default = "dcosadmin"
+}
+
+variable "admin_password_list" {
+  description = "Windows Admin Password list"
+  type = "list"
+}
